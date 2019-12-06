@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  solari.wallet:
+    image: ${DOCKER_REGISTRY-}solariwallet
+    build:
+      context: .
+      dockerfile: solari.wallet/Dockerfile
+
+  solari.wallet.service:
+    image: ${DOCKER_REGISTRY-}solariwalletservice
+    build:
+      context: .
+      dockerfile: Solari.Wallet.Service/Dockerfile
+

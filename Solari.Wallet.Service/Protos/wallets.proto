@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "Solari.Wallet.Service";
+
+package wallets;
+
+
+service Wallets {
+
+  rpc Deposit (WalletRequest) returns (WalletReply);
+  rpc Withdraw (WalletRequest) returns (WalletReply);
+  rpc Balance (BalanceRequest) returns (WalletReply);
+}
+
+
+message BalanceRequest {
+}
+
+message WalletRequest {
+  double value = 1;
+}
+
+
+message WalletReply {
+  string message = 1;
+}

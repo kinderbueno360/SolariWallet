@@ -1,0 +1,6 @@
+{
+  "Redis": {
+    "Connection": "localhost",
+    "DataBase": 0
+  }
+}

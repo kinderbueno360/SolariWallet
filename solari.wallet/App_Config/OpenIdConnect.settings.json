@@ -1,0 +1,8 @@
+{
+  "OpenIdConnect": {
+    "Authority": "https://localhost/auth",
+    "RoleClaimType": "",
+    "ApiScope": "",
+    "Audience": ""
+  }
+}

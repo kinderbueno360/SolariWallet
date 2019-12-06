@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="AutoMapper\" />
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="EventHandlers\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiquidProjections" Version="3.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="SqlStreamStore" Version="1.2.0-beta.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Solari.Wallet.Domain\Solari.Wallet.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,5 @@
+{
+  "SolariWalletSql": {
+    "Connection": "Data Source=localhost;Initial Catalog=Studio360I;User Id=360user;Password=360user;"
+  }
+}
