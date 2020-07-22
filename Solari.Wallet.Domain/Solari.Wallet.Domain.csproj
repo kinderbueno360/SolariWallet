@@ -1,13 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Commands\" />
-    <Folder Include="Validations\" />
+    <Compile Remove="Commands\**" />
+    <Compile Remove="Interfaces\**" />
+    <Compile Remove="Validations\**" />
+    <EmbeddedResource Remove="Commands\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Validations\**" />
+    <None Remove="Commands\**" />
+    <None Remove="Interfaces\**" />
+    <None Remove="Validations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.11.0" />
   </ItemGroup>
 
   <ItemGroup>
