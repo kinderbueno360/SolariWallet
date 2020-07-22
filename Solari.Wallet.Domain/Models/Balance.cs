@@ -1,30 +1,57 @@
-﻿using Solari.Wallet.Domain.Core.Models;
+﻿using CSharpFunctionalExtensions;
+using Solari.Wallet.Domain.Core.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Solari.Wallet.Domain.Models
 {
-    public class Balance : Entity
+    public class Balance : ValueObject<Balance>
     {
-        public Balance(decimal amount, DateTime asOf)
+        public Money Amount { get; protected set; }
+        public DateTime AsOf { get; protected set; }
+
+        public static Balance None = new Balance(Money.None, DateTime.Now);
+
+        public static Balance CreateNewBalance(Money amount, DateTime asOf)
+        {
+            return new Balance(amount, asOf);
+        }
+
+        private Balance(Money amount, DateTime asOf)
         {
             Amount = amount;
             AsOf = asOf;
         }
 
-        public decimal Amount { get; private set; }
-        public DateTime AsOf { get; private set; }
-
-        public void Add(decimal value)
+        public Result<Balance> Add(Money moneyAdd)
         {
-            AsOf = DateTime.UtcNow;
-            Amount += value;
+            SetAsOf();
+
+            return Amount
+                    .Add(moneyAdd)
+                    .OnFailure(error => Result.Failure<Balance>(error))
+                    .Map(money => new Balance(money, AsOf));
         }
 
-        public void Subtract(decimal value)
+        private void SetAsOf()
         {
             AsOf = DateTime.UtcNow;
-            Amount -= value;
+        }
 
+        public Result<Balance> Subtract(Money moneyAdd)
+        {
+            AsOf = DateTime.UtcNow;
+
+            return Amount
+                    .Subtract(moneyAdd)
+                    .OnFailure(error => Result.Failure<Balance>(error))
+                    .Map(money => new Balance(money, AsOf));
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Amount;
+            yield return AsOf;
         }
     }
 }
