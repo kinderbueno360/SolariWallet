@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Grpc.Net.Client;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Solari.Wallet.Application.Projections;
-using Solari.Wallet.Application.Services;
-using Solari.Wallet.Service;
-using SqlStreamStore;
-using SqlStreamStore.Streams;
-using static Solari.Wallet.Service.Wallets;
-
-namespace Solari.Wallet.Controllers
+﻿namespace Solari.Wallet.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Grpc.Net.Client;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Solari.Wallet.Application.Projections;
+    using Solari.Wallet.Application.Services;
+    using Solari.Wallet.Service;
+    using SqlStreamStore;
+    using SqlStreamStore.Streams;
+    using static Solari.Wallet.Service.Wallets;
+
     [Route("api/[controller]")]
     [ApiController]
     public class WalletController : ControllerBase
