@@ -7,6 +7,8 @@ namespace Solari.Wallet.Domain.Models
     public class Money : ValueObject<Money>
     {
 
+        public static Money None = new Money(0M, Currency.None);
+
         protected Money(Decimal amount, string currencyCode, ICurrencyLookup currencyLookup)
         {
             this.CheckRule(new CurrencyShouldBeSpecified(currencyCode));

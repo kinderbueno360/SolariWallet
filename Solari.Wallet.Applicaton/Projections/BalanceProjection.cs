@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Solari.Wallet.Domain.Events;
 using Solari.Wallet.Domain.Models;
+using Solari.Wallet.Domain.Services;
 using SqlStreamStore;
 using SqlStreamStore.Streams;
 using System;
@@ -13,7 +14,7 @@ namespace Solari.Wallet.Application.Projections
 	public class BalanceProjection : IBalanceProjection
 	{
 		private readonly IEventMap<Balance> _map;
-		public Balance Balance { get; } = new Balance(0, DateTime.UtcNow);
+		public Balance Balance { get; } = Balance.None;
 		public Balance GetBalance()
 		{
 			return Balance;
@@ -23,19 +24,19 @@ namespace Solari.Wallet.Application.Projections
 			var mapBuilder = new EventMapBuilder<Balance>();
 			mapBuilder.Map<Deposited>().As((deposited, balance) =>
 			{
-				balance.Add(deposited.Amount);
+				balance.Add(Money.FromDecimal(deposited.Amount, "USD", new CurrencyLookup()));
 			});
 			mapBuilder.Map<Deposited>()
 					  .When(deposited => deposited.Amount == 100)
 					  .As((deposited, balance) =>
 					  {
 						  //Bonus
-						  balance.Add(deposited.Amount);
+						  balance.Add(Money.FromDecimal(deposited.Amount, "USD", new CurrencyLookup()));
 					  });
 
 			mapBuilder.Map<Withdrawn>().As((withdrawn, balance) =>
 			{
-				balance.Subtract(withdrawn.Amount);
+				balance.Subtract(Money.FromDecimal(withdrawn.Amount, "USD", new CurrencyLookup()));
 			});
 
 			_map = mapBuilder.Build(new ProjectorMap<Balance>()
