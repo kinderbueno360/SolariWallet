@@ -16,15 +16,11 @@ namespace Solari.Wallet.Domain.Models
 
         public static Currency None = new Currency { InUse = false };
 
-
-        protected override bool EqualsCore(Currency other)
+        protected override IEnumerable<object> GetEqualityComponents()
         {
-            throw new System.NotImplementedException();
-        }
-
-        protected override int GetHashCodeCore()
-        {
-            throw new System.NotImplementedException();
+            yield return CurrencyCode;
+            yield return InUse;
+            yield return DecimalPlaces;
         }
     }
 }
