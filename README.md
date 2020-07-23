@@ -6,6 +6,10 @@ This is a GRPC API designed to solve the problem of Transfers money abroad betwe
 ## Required
 - .Net 5
 
+## Board
+
+https://trello.com/b/b1vKGQ1Y/exchange-money
+
 ## Assumptions:
 
 - 
